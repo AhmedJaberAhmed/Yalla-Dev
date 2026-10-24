@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yalla Dev | مواقع وتطبيقات وأنظمة للمحلات والشركات</title>
+<meta name="description" content="Yalla Dev فريق مبرمجين مصريين بنعمل مواقع وتطبيقات وأنظمة مخزون ومبيعات للمحلات والشركات الصغيرة. كلمنا على واتساب.">
+<meta name="theme-color" content="#0a3d91">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+/* ============ المتغيرات والأساسيات ============ */
+:root{
+  --navy:#0a3d91;
+  --navy-dark:#062a66;
+  --navy-deep:#041c47;
+  --orange:#ff7a00;
+  --orange-dark:#e56d00;
+  --bg:#f6f8fc;
+  --card:#ffffff;
+  --text:#0f1b33;
+  --muted:#5b6b86;
+  --line:#e3e9f4;
+  --radius:18px;
+  --shadow:0 10px 30px rgba(10,61,145,.10);
+  --shadow-lg:0 20px 50px rgba(10,61,145,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  font-family:'Cairo',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.8;
+  font-size:17px;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+.container{width:min(1160px,92%);margin-inline:auto}
+section{padding:84px 0}
+.section-head{text-align:center;max-width:680px;margin:0 auto 48px}
+.section-head .eyebrow{
+  display:inline-block;background:rgba(255,122,0,.12);color:var(--orange-dark);
+  font-weight:700;font-size:14px;padding:4px 14px;border-radius:999px;margin-bottom:12px;
+}
+.section-head h2{font-size:clamp(26px,4vw,38px);line-height:1.4;color:var(--navy-dark);font-weight:800}
+.section-head p{color:var(--muted);margin-top:10px}
+
+/* ============ الأزرار ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 26px;border-radius:14px;font-weight:700;border:2px solid transparent;
+  cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid rgba(255,122,0,.55);outline-offset:2px;
+}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 24px rgba(255,122,0,.35)}
+.btn-primary:hover{background:var(--orange-dark)}
+.btn-outline{border-color:rgba(255,255,255,.6);color:#fff}
+.btn-outline:hover{background:#fff;color:var(--navy-dark)}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-dark:hover{background:var(--navy-dark)}
+.btn-wa{background:#25d366;color:#fff;box-shadow:0 10px 24px rgba(37,211,102,.35)}
+.btn-wa:hover{background:#1fb859}
+.btn svg{width:20px;height:20px;fill:currentColor}
+.btn-wa svg .h,.wa-float svg .h{fill:#25d366}
+
+/* ============ الهيدر ============ */
+.header{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;transition:box-shadow .25s, border-color .25s;
+}
+.header.scrolled{box-shadow:0 6px 24px rgba(10,61,145,.10);border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.brand{display:flex;align-items:center}
+.brand img{width:207px;height:46px;object-fit:cover}
+.brand-text{display:none;font-weight:800;font-size:24px;color:var(--navy)}
+.brand-text i{font-style:normal;color:var(--orange)}
+.brand.noimg img{display:none}
+.brand.noimg .brand-text{display:block}
+.nav-links{display:flex;align-items:center;gap:26px;font-weight:600}
+.nav-links a{color:var(--navy-dark);position:relative}
+.nav-links a:not(.btn)::after{
+  content:"";position:absolute;inset-inline:0;bottom:-4px;height:2px;background:var(--orange);
+  transform:scaleX(0);transition:transform .25s;
+}
+.nav-links a:not(.btn):hover::after{transform:scaleX(1)}
+.nav-links .btn{padding:9px 18px;color:#fff}
+.menu-btn{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px;border-radius:10px}
+.menu-btn span,.menu-btn span::before,.menu-btn span::after{
+  display:block;width:24px;height:3px;background:var(--navy);border-radius:3px;margin:auto;position:relative;transition:.25s;
+}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;inset-inline:0}
+.menu-btn span::before{top:-8px}
+.menu-btn span::after{top:8px}
+.menu-btn.open span{background:transparent}
+.menu-btn.open span::before{top:0;transform:rotate(45deg)}
+.menu-btn.open span::after{top:0;transform:rotate(-45deg)}
+
+/* ============ الهيرو ============ */
+.hero{
+  position:relative;overflow:hidden;color:#fff;padding:150px 0 100px;
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(255,122,0,.30), transparent 60%),
+    radial-gradient(700px 500px at 0% 110%, rgba(61,129,255,.35), transparent 60%),
+    linear-gradient(160deg,var(--navy-deep),var(--navy) 70%);
+}
+.hero::before{
+  content:"";position:absolute;inset:0;opacity:.07;
+  background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);
+  background-size:44px 44px;
+}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);padding:6px 16px;border-radius:999px;font-size:15px;font-weight:600;margin-bottom:20px;
+}
+.badge .dot{width:9px;height:9px;border-radius:50%;background:#34d27b;box-shadow:0 0 0 4px rgba(52,210,123,.25)}
+.hero h1{font-size:clamp(32px,5.2vw,56px);line-height:1.35;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero p.lead{font-size:clamp(17px,2vw,20px);color:rgba(255,255,255,.86);margin:20px 0 32px;max-width:560px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.hero-stats{display:flex;flex-wrap:wrap;gap:34px;margin-top:42px}
+.hero-stats strong{display:block;font-size:34px;line-height:1.2;color:#fff}
+.hero-stats strong small{color:var(--orange);font-size:28px}
+.hero-stats span{color:rgba(255,255,255,.75);font-size:15px}
+
+/* لوحة العرض في الهيرو (رسم توضيحي بأرقام تجريبية) */
+.mock{position:relative;max-width:460px;margin-inline:auto;width:100%}
+.mock-card{
+  background:#fff;color:var(--text);border-radius:24px;padding:22px;box-shadow:var(--shadow-lg);
+  transform:rotate(-2deg);
+}
+.mock-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.mock-top b{font-size:18px;color:var(--navy-dark)}
+.mock-dots{display:flex;gap:6px}
+.mock-dots i{width:10px;height:10px;border-radius:50%;background:#dfe6f3}
+.mock-dots i:first-child{background:var(--orange)}
+.mock-kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kpi{background:var(--bg);border-radius:14px;padding:12px 14px}
+.kpi small{color:var(--muted);font-size:13px}
+.kpi b{display:block;font-size:22px;color:var(--navy)}
+.kpi.warn b{color:var(--orange-dark)}
+.mock-bars{display:flex;align-items:flex-end;gap:10px;height:110px;margin-top:16px;padding:0 4px}
+.mock-bars span{
+  flex:1;background:linear-gradient(180deg,var(--navy),#4a86e8);border-radius:8px 8px 4px 4px;
+  height:var(--h);transform-origin:bottom;animation:grow 1.2s ease both;
+}
+.mock-bars span:nth-child(4){background:linear-gradient(180deg,var(--orange),#ffb066)}
+@keyframes grow{from{transform:scaleY(.1)}to{transform:scaleY(1)}}
+.mock-note{margin-top:12px;font-size:12px;color:var(--muted);text-align:center}
+.chip{
+  position:absolute;background:#fff;color:var(--text);border-radius:14px;padding:10px 14px;
+  box-shadow:var(--shadow-lg);font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;
+  animation:float 5s ease-in-out infinite;
+}
+.chip i{font-style:normal;font-size:18px}
+.chip.c1{top:-18px;inset-inline-start:-14px}
+.chip.c2{bottom:34px;inset-inline-end:-18px;animation-delay:-2s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ============ المشاكل ============ */
+.problems{background:#fff;padding:64px 0}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.problem{
+  background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.problem .x{
+  flex:none;width:36px;height:36px;border-radius:50%;background:rgba(255,122,0,.14);color:var(--orange-dark);
+  display:grid;place-items:center;font-weight:800;
+}
+.problem p{font-weight:600;color:var(--navy-dark);line-height:1.6}
+.problems-end{
+  margin-top:28px;text-align:center;font-weight:700;font-size:20px;color:var(--navy);
+}
+.problems-end span{color:var(--orange-dark)}
+
+/* ============ الخدمات ============ */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:22px}
+.service{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;
+  transition:transform .25s, box-shadow .25s, border-color .25s;position:relative;overflow:hidden;
+}
+.service::after{
+  content:"";position:absolute;inset-inline:0;top:0;height:4px;background:linear-gradient(90deg,var(--navy),var(--orange));
+  transform:scaleX(0);transform-origin:right;transition:transform .35s;
+}
+.service:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+.service:hover::after{transform:scaleX(1)}
+.service .ico{
+  width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:28px;margin-bottom:16px;
+  background:linear-gradient(135deg,rgba(10,61,145,.10),rgba(255,122,0,.16));
+}
+.service h3{font-size:20px;color:var(--navy-dark);margin-bottom:6px}
+.service p{color:var(--muted);font-size:16px}
+
+/* ============ الأعمال ============ */
+.work{background:#fff}
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:34px}
+.filter{
+  border:1.5px solid var(--line);background:var(--bg);color:var(--navy-dark);padding:8px 20px;border-radius:999px;
+  font-weight:700;cursor:pointer;transition:.2s;
+}
+.filter:hover{border-color:var(--navy)}
+.filter.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.work-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(310px,100%),1fr));gap:26px}
+.project{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  display:flex;flex-direction:column;cursor:pointer;text-align:start;
+  transition:transform .25s, box-shadow .25s;
+}
+.project:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.project.hide{display:none}
+.shot{
+  position:relative;aspect-ratio:16/10;overflow:hidden;
+  background:linear-gradient(135deg,var(--navy),#3f7be0);
+}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s}
+.project:hover .shot img{transform:scale(1.05)}
+.shot .fallback{
+  display:none;position:absolute;inset:0;place-items:center;text-align:center;color:#fff;font-weight:800;padding:20px;font-size:20px;
+}
+.shot.noimg .fallback{display:grid}
+.shot .zoom{
+  position:absolute;inset-inline-end:12px;bottom:12px;background:rgba(6,42,102,.85);color:#fff;
+  padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;opacity:0;transition:.25s;
+}
+.project:hover .zoom{opacity:1}
+.project-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.project-body h3{font-size:19px;color:var(--navy-dark);line-height:1.5}
+.project-body p{color:var(--muted);font-size:15.5px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  background:rgba(10,61,145,.08);color:var(--navy);font-size:13px;font-weight:700;padding:2px 12px;border-radius:999px;
+  direction:ltr;
+}
+.work-note{text-align:center;color:var(--muted);font-size:15px;margin-top:30px}
+
+/* ============ مراحل الشغل ============ */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:22px;counter-reset:step}
+.step{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px 24px 24px;position:relative;counter-increment:step;
+}
+.step::before{
+  content:counter(step);position:absolute;top:-18px;inset-inline-start:22px;width:40px;height:40px;border-radius:12px;
+  background:var(--orange);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px;
+  box-shadow:0 8px 18px rgba(255,122,0,.35);
+}
+.step h3{font-size:19px;color:var(--navy-dark);margin-bottom:4px}
+.step p{color:var(--muted);font-size:15.5px}
+
+/* ============ ليه إحنا ============ */
+.why{
+  background:linear-gradient(160deg,var(--navy-deep),var(--navy));color:#fff;
+}
+.why .section-head h2{color:#fff}
+.why .section-head p{color:rgba(255,255,255,.75)}
+.why .section-head .eyebrow{background:rgba(255,255,255,.14);color:#ffd2a3}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px}
+.why-item{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:24px;
+  display:flex;gap:16px;
+}
+.why-item .tick{
+  flex:none;width:34px;height:34px;border-radius:50%;background:var(--orange);display:grid;place-items:center;font-weight:800;
+}
+.why-item h3{font-size:18px;margin-bottom:2px}
+.why-item p{color:rgba(255,255,255,.75);font-size:15.5px}
+
+/* ============ التقنيات ============ */
+.tech{padding:54px 0;background:#fff}
+.tech h3{text-align:center;color:var(--muted);font-weight:700;font-size:17px;margin-bottom:22px}
+.tech-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.tech-row span{
+  direction:ltr;background:var(--bg);border:1px solid var(--line);padding:8px 20px;border-radius:12px;font-weight:700;color:var(--navy-dark);
+}
+
+/* ============ الفريق ============ */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1080px;margin-inline:auto;align-items:stretch}
+.member{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px 22px;text-align:center;
+  transition:transform .25s, box-shadow .25s;
+}
+.member:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.member.lead{box-shadow:var(--shadow)}
+.avatar{
+  --av:clamp(160px,18vw,210px);
+  position:relative;width:var(--av);height:var(--av);border-radius:50%;margin:0 auto 20px;overflow:hidden;
+  background:linear-gradient(135deg,var(--navy),var(--orange));display:grid;place-items:center;
+  color:#fff;font-weight:800;font-size:calc(var(--av) * .3);border:5px solid #fff;box-shadow:var(--shadow-lg);
+}
+/* لو وش حد اتقص في الدايرة: غيّروا --pos (مكان الصورة) و --zoom (التكبير) في سطر الصورة */
+.avatar img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:var(--pos,center 10%);transform:scale(var(--zoom,1));transform-origin:var(--pos,center 10%);
+}
+.member h3{font-size:clamp(20px,2.2vw,24px);color:var(--navy-dark)}
+.member .role{color:var(--orange-dark);font-weight:700;font-size:15px;margin-bottom:8px}
+.member p{color:var(--muted);font-size:15px}
+
+/* ============ الأسئلة ============ */
+.faq{background:#fff}
+.faq-list{max-width:820px;margin-inline:auto;display:grid;gap:12px}
+.faq-item{border:1px solid var(--line);border-radius:14px;background:var(--bg);overflow:hidden}
+.faq-q{
+  width:100%;text-align:start;background:none;border:0;padding:18px 22px;font-weight:700;color:var(--navy-dark);
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:17px;
+}
+.faq-q::after{
+  content:"+";flex:none;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;
+  font-size:20px;line-height:1;transition:.25s;
+}
+.faq-item.open .faq-q::after{content:"−";background:var(--orange)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a p{padding:0 22px 18px;color:var(--muted)}
+
+/* ============ التواصل ============ */
+.contact{
+  background:
+    radial-gradient(700px 400px at 100% 0%, rgba(255,122,0,.18), transparent 60%),
+    linear-gradient(160deg,var(--navy-deep),var(--navy));
+  color:#fff;
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:42px;align-items:start}
+.contact h2{font-size:clamp(28px,4vw,40px);line-height:1.4;font-weight:800}
+.contact h2 em{font-style:normal;color:var(--orange)}
+.contact .sub{color:rgba(255,255,255,.8);margin:14px 0 26px}
+.contact-list{display:grid;gap:14px;margin-bottom:26px}
+.contact-list a{
+  display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+  padding:14px 18px;border-radius:14px;transition:.2s;
+}
+.contact-list a:hover{background:rgba(255,255,255,.16)}
+.contact-list .ic{
+  flex:none;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:20px;
+}
+.contact-list small{display:block;color:rgba(255,255,255,.7);font-size:13px;line-height:1.3}
+.contact-list b{direction:ltr;display:inline-block}
+.form{
+  background:#fff;color:var(--text);border-radius:22px;padding:30px;box-shadow:var(--shadow-lg);display:grid;gap:16px;
+}
+.form h3{font-size:22px;color:var(--navy-dark)}
+.field{display:grid;gap:6px}
+.field label{font-weight:700;font-size:15px;color:var(--navy-dark)}
+.field input,.field select,.field textarea{
+  width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--text);transition:.2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--navy);background:#fff;outline:none}
+.field textarea{min-height:110px;resize:vertical}
+.field .err{color:#d93a3a;font-size:13.5px;min-height:0;display:none}
+.field.invalid input,.field.invalid textarea{border-color:#d93a3a}
+.field.invalid .err{display:block}
+.form small.hint{color:var(--muted);text-align:center;font-size:13.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* ============ الفوتر ============ */
+.footer{background:var(--navy-deep);color:rgba(255,255,255,.75);padding:34px 0;font-size:15px}
+.footer .row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+.footer .links{display:flex;gap:20px;flex-wrap:wrap}
+.footer .links a:hover{color:var(--orange)}
+
+/* ============ زر واتساب العايم ============ */
+.wa-float{
+  position:fixed;inset-inline-start:20px;bottom:20px;z-index:60;width:60px;height:60px;border-radius:50%;
+  background:#25d366;display:grid;place-items:center;box-shadow:0 12px 28px rgba(37,211,102,.5);transition:transform .2s;
+}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+.wa-float::after{
+  content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25d366;animation:ping 2.2s infinite;
+}
+@keyframes ping{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+
+/* ============ النافذة المنبثقة ============ */
+.modal{
+  position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;
+  background:rgba(4,28,71,.78);backdrop-filter:blur(4px);
+}
+.modal.open{display:flex}
+.modal-box{
+  background:#fff;border-radius:22px;max-width:960px;width:100%;max-height:92vh;overflow:auto;position:relative;
+  box-shadow:var(--shadow-lg);animation:pop .25s ease;
+}
+@keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-img{background:var(--bg);display:grid;place-items:center;min-height:120px;position:relative}
+.modal-img img{max-height:56vh;width:100%;object-fit:contain}
+.modal-img .fallback{display:none;padding:50px 20px;font-weight:800;color:var(--navy);font-size:22px}
+.modal-img.noimg .fallback{display:block}
+.modal-info{padding:24px 28px 30px;display:grid;gap:12px}
+.modal-info h3{font-size:24px;color:var(--navy-dark)}
+.modal-info p{color:var(--muted)}
+.modal-info .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-info .box{background:var(--bg);border-radius:14px;padding:14px 16px}
+.modal-info .box b{display:block;color:var(--orange-dark);margin-bottom:2px}
+.modal-close{
+  position:absolute;top:12px;inset-inline-start:12px;z-index:2;width:42px;height:42px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(6,42,102,.9);color:#fff;font-size:22px;line-height:1;
+}
+
+
+/* ============ أيقونات SVG (بدل الإيموجي) ============ */
+.service .ico svg,.contact-list .ic svg{width:26px;height:26px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.service .ico svg{stroke:var(--navy)}
+.contact-list .ic svg{stroke:#fff}
+.problem .x svg,.why-item .tick svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.why-item .tick{color:#fff}
+.chip::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--orange)}
+
+/* ============ ظهور تدريجي ============ */
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+
+/* ============ استجابة وتكيّف مع كل الشاشات ============ */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+.footer{padding-bottom:calc(34px + env(safe-area-inset-bottom))}
+.wa-float{inset-inline-start:max(20px,env(safe-area-inset-left));bottom:max(20px,env(safe-area-inset-bottom))}
+
+/* شاشات كبيرة */
+@media (min-width:1400px){
+  body{font-size:18px}
+  .container{width:min(1280px,88%)}
+  .work-grid{grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr))}
+}
+
+/* لابتوب صغير وتابلت أفقي */
+@media (max-width:1100px){
+  .nav-links{gap:18px}
+  .hero-grid{gap:32px}
+  .contact-grid{gap:30px}
+}
+
+/* تابلت: القائمة بتتحول لزرار */
+@media (max-width:920px){
+  .hero-grid,.contact-grid{grid-template-columns:1fr}
+  .hero{padding:128px 0 80px}
+  .hero p.lead{max-width:none}
+  .mock{margin-top:10px}
+  .menu-btn{display:block}
+  .nav-links{
+    position:absolute;top:72px;inset-inline:0;background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:10px 4%;
+    box-shadow:0 20px 30px rgba(10,61,145,.12);display:none;border-top:1px solid var(--line);
+    max-height:calc(100vh - 72px);overflow-y:auto;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:14px 6px;border-bottom:1px solid var(--line)}
+  .nav-links a::after{display:none}
+  .nav-links .btn{margin-top:12px;border-bottom:0;text-align:center}
+  .team-grid{gap:16px}
+  .member{padding:28px 14px}
+}
+
+/* موبايل كبير: الفريق في عمود واحد وأحمد جابر الأول */
+@media (max-width:720px){
+  .team-grid{grid-template-columns:1fr;max-width:440px;gap:22px}
+  .member.lead{order:-1}
+  .avatar{--av:180px}
+  .modal{padding:12px}
+  .modal-box{max-height:94vh}
+  .modal-info{padding:20px 20px 26px}
+  .modal-info .cols{grid-template-columns:1fr}
+  .steps{gap:30px}
+}
+
+/* موبايل */
+@media (max-width:560px){
+  body{font-size:16px}
+  section{padding:64px 0}
+  .brand img{width:170px;height:38px}
+  .two{grid-template-columns:1fr}
+  .hero-stats{gap:22px}
+  .hero-cta .btn{flex:1 1 100%}
+  .chip{display:none}
+  .form{padding:22px}
+  .wa-float{width:54px;height:54px}
+  .filters{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;margin-inline:-4%;padding:0 4% 8px;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .filter{flex:none}
+  .contact-list a{padding:12px 14px}
+  .contact-list b{font-size:15px;word-break:break-all}
+}
+
+/* موبايل صغير جداً */
+@media (max-width:380px){
+  .container{width:94%}
+  .hero h1{font-size:27px}
+  .brand img{width:150px;height:34px}
+  .btn{padding:12px 18px}
+  .section-head h2{font-size:24px}
+  .avatar{--av:150px}
+}
+
+/* موبايل بالعرض (landscape) */
+@media (max-height:520px) and (orientation:landscape){
+  .hero{padding:96px 0 52px}
+  section{padding:52px 0}
+  .modal-img img{max-height:44vh}
+  .nav-links{max-height:calc(100vh - 72px)}
+}
+
+/* شاشات اللمس: مفيش hover، فنخلي كل حاجة ظاهرة وسهلة الضغط */
+@media (hover:none){
+  .project:hover,.service:hover,.member:hover,.btn:hover,.wa-float:hover{transform:none}
+  .project:hover .shot img{transform:none}
+  .project .zoom{opacity:1}
+  .filter,.faq-q,.nav-links a,.menu-btn{min-height:44px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============ الهيدر ============ -->
+<header class="header" id="header">
+  <div class="container nav">
+    <a href="#top" class="brand" id="brand" aria-label="Yalla Dev">
+      <img src="logo.png" alt="Yalla Dev" id="brandImg">
+      <span class="brand-text"><b>Yalla</b> <i>Dev</i></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false"><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">خدماتنا</a>
+      <a href="#work">أعمالنا</a>
+      <a href="#process">بنشتغل إزاي</a>
+      <a href="#team">الفريق</a>
+      <a href="#faq">أسئلة</a>
+      <a href="#contact" class="btn btn-primary">كلمنا</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ الهيرو ============ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge"><i class="dot"></i> فريق مبرمجين مصريين</span>
+      <h1>نظام يظبّط محلك.. <em>بدل الدفتر والإكسل</em></h1>
+      <p class="lead">إحنا Yalla Dev، بنعمل مواقع وتطبيقات وأنظمة مخزون ومبيعات للمحلات والشركات الصغيرة. من غير تعقيد، وبنكلمك بلغتك، ونوريك الشغل قبل ما تدفع أي حاجة.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">ابدأ مشروعك دلوقتي</a>
+        <a href="#work" class="btn btn-outline">شوف شغلنا</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong><span data-count="10">0</span><small>+</small></strong><span>مشروع من تنفيذنا</span></div>
+        <div><strong><span data-count="3">0</span></strong><span>مبرمجين في الفريق</span></div>
+        <div><strong>Flutter</strong><span>للموبايل والويب</span></div>
+      </div>
+    </div>
+
+    <div class="mock reveal" aria-hidden="true">
+      <div class="chip c1">مخزونك متابَع لحظة بلحظة</div>
+      <div class="mock-card">
+        <div class="mock-top"><b>لوحة المحل</b><div class="mock-dots"><i></i><i></i><i></i></div></div>
+        <div class="mock-kpis">
+          <div class="kpi"><small>مبيعات النهارده</small><b>375 ج</b></div>
+          <div class="kpi warn"><small>أصناف قربت تخلص</small><b>3 أصناف</b></div>
+        </div>
+        <div class="mock-bars">
+          <span style="--h:35%"></span><span style="--h:55%"></span><span style="--h:42%"></span>
+          <span style="--h:88%"></span><span style="--h:60%"></span><span style="--h:72%"></span><span style="--h:50%"></span>
+        </div>
+        <div class="mock-note">رسم توضيحي بأرقام تجريبية</div>
+      </div>
+      <div class="chip c2">فاتورة PDF بضغطة</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ المشاكل ============ -->
+<section class="problems">
+  <div class="container">
+    <div class="section-head reveal" style="margin-bottom:34px">
+      <span class="eyebrow">تعرف المشاكل دي؟</span>
+      <h2>لو شغلك بيمشي بالورقة والقلم، الكلام ده يخصك</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem reveal"><span class="x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><p>بتجرد البضاعة بإيدك، وكل مرة الرقم يطلع غلط</p></div>
+      <div class="problem reveal"><span class="x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><p>مش عارف إيه اللي خلص من المخزن غير لما الزبون يسأل</p></div>
+      <div class="problem reveal"><span class="x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><p>الفواتير والحسابات على ورق، وبتضيع أو بتتلخبط</p></div>
+      <div class="problem reveal"><span class="x"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><p>محلك أو شركتك مالهاش موقع أو صفحة تعرّف الناس بيك</p></div>
+    </div>
+    <p class="problems-end reveal">إحنا بنحلها بنظام بسيط يشتغل من الموبايل <span>وتفهمه من أول يوم.</span></p>
+  </div>
+</section>
+
+<!-- ============ الخدمات ============ -->
+<section id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">خدماتنا</span>
+      <h2>بنعمل إيه بالظبط؟</h2>
+      <p>من موقع بسيط يعرّف بيك، لحد نظام كامل يدير شغلك.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+        <h3>موقع تعريفي للمحل أو الشركة</h3>
+        <p>صفحات شيك وسريعة تظهر على الموبايل كويس، وفيها زرار واتساب يوصّل الزبون ليك على طول.</p>
+      </article>
+      <article class="service reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div>
+        <h3>نظام مخزون ومبيعات (ERP)</h3>
+        <p>منتجات ومخازن وعملاء وموردين وفواتير، مع تنبيه لما صنف يقرب يخلص وتقارير توريك شغلك ماشي إزاي.</p>
+      </article>
+      <article class="service reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+        <h3>تطبيقات موبايل</h3>
+        <p>تطبيق واحد يشتغل على أندرويد وآيفون بنفس الجودة، بتصميم حلو وسرعة عالية.</p>
+      </article>
+      <article class="service reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.5L21 8H6"/></svg></div>
+        <h3>متجر إلكتروني</h3>
+        <p>تطبيق ولوحة تحكم: منتجات وأقسام وسلة وطلبات ودفع عند الاستلام، وتتحكم في كل حاجة من مكانك.</p>
+      </article>
+      <article class="service reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></div>
+        <h3>أنظمة حجز ومواعيد</h3>
+        <p>لعيادات وصالونات وفنادق: العميل يحجز من الموبايل، وإنت تدير المواعيد والمدفوعات من لوحة واحدة.</p>
+      </article>
+      <article class="service reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div>
+        <h3>لوحات تحكم وذكاء اصطناعي</h3>
+        <p>تقارير وأرقام واضحة، وحلول ذكية زي تسجيل الحضور بالتعرّف على الوجه وتوقّع النتايج من البيانات.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ أعمالنا ============ -->
+<section class="work" id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">أعمالنا</span>
+      <h2>شغل حقيقي مش كلام</h2>
+      <p>دي مشاريع بنيناها بإيدينا. دوس على أي مشروع تشوفه بالتفصيل.</p>
+    </div>
+    <div class="filters reveal" id="filters" role="tablist" aria-label="تصنيف الأعمال">
+      <button class="filter active" data-filter="all">الكل</button>
+      <button class="filter" data-filter="systems">أنظمة إدارة</button>
+      <button class="filter" data-filter="shops">متاجر</button>
+      <button class="filter" data-filter="booking">حجز ومواعيد</button>
+      <button class="filter" data-filter="tech">تقنيات متقدمة</button>
+    </div>
+    <div class="work-grid" id="workGrid"></div>
+    <p class="work-note reveal">عايز نظام شبه واحد منهم؟ كلمنا ونعدّله على قد شغلك.</p>
+  </div>
+</section>
+
+<!-- ============ بنشتغل إزاي ============ -->
+<section id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">بنشتغل إزاي</span>
+      <h2>4 خطوات واضحة من أول كلمة لحد التسليم</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>بنسمعك الأول</h3><p>بنفهم شغلك وإيه اللي بيتعبك، وبنسأل أسئلة بسيطة من غير مصطلحات معقدة.</p></div>
+      <div class="step reveal"><h3>نوريك نسخة تجريبية</h3><p>تشوف شكل النظام على موبايلك قبل ما نبدأ التنفيذ، وتقولنا رأيك.</p></div>
+      <div class="step reveal"><h3>بنبني على مراحل</h3><p>بنتفق مكتوب على المطلوب والسعر والمواعيد، وتشوف التقدم أول بأول.</p></div>
+      <div class="step reveal"><h3>نسلّم وندعمك</h3><p>بنسلّمك النظام ونشرحلك تستخدمه، وبنفضل جنبك لو احتجت تعديل أو مساعدة.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ليه إحنا ============ -->
+<section class="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">ليه Yalla Dev</span>
+      <h2>ليه تشتغل معانا؟</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>بنتكلم لغتك</h3><p>بنشرح بالبلدي، ومش هتحس إنك بتتعامل مع "تقنيين" مش فاهمين شغلك.</p></div></div>
+      <div class="why-item reveal"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>تشوف قبل ما تدفع</h3><p>بنبدأ بنسخة تجريبية توريك الفكرة، وبعدها بنتفق على التنفيذ.</p></div></div>
+      <div class="why-item reveal"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>اتفاق مكتوب ودفعات واضحة</h3><p>مفيش مفاجآت: المطلوب والسعر والمواعيد متسجلين من الأول.</p></div></div>
+      <div class="why-item reveal"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>كود منظم وقابل للتطوير</h3><p>بنشتغل بمعمارية نضيفة (Clean Architecture)، فتقدر توسّع النظام بعدين بسهولة.</p></div></div>
+      <div class="why-item reveal"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>دعم بعد التسليم</h3><p>تعديلات مجانية في أول شهر، وصيانة ودعم بعد كده باشتراك بسيط.</p></div></div>
+      <div class="why-item reveal"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>خبرة بتتشارك</h3><p>أحمد جابر مدرّب Flutter في مبادرة رواد مصر الرقمية (DEPI)، فبنبني الشغل بأسلوب ونظام.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ التقنيات ============ -->
+<div class="tech">
+  <div class="container reveal">
+    <h3>التقنيات اللي بنشتغل بيها</h3>
+    <div class="tech-row">
+      <span>Flutter</span><span>Dart</span><span>Laravel 12</span><span>PHP</span><span>Supabase</span>
+      <span>PostgreSQL</span><span>Firebase</span><span>REST APIs</span><span>Python</span><span>WebRTC</span><span>TFLite / AI</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ الفريق ============ -->
+<section id="team">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">الفريق</span>
+      <h2>ناس بتشتغل معاك مش من ورا شاشة</h2>
+      <p>فريق صغير، بنتواصل معاك مباشرة، ومفيش وسطاء.</p>
+    </div>
+    <div class="team-grid">
+      <article class="member reveal">
+        <div class="avatar">أإ<img src="Ahmed%20Emam.jpeg" alt="أحمد إمام" onerror="this.remove()"></div>
+        <h3>أحمد إمام</h3>
+        <div class="role">Flutter Developer</div>
+        <p>متخصص في تطبيقات الموبايل وواجهات الاستخدام السريعة والسلسة.</p>
+      </article>
+      <article class="member lead reveal">
+        <div class="avatar">أج<img src="Ahmed%20Jaber.png" alt="أحمد جابر" style="--zoom:1;--pos:50% 0%" onerror="this.remove()"></div>
+        <h3>أحمد جابر</h3>
+        <div class="role">Full-Stack Developer · Flutter & Laravel</div>
+        <p>بيبني التطبيقات والـ APIs والأنظمة من الألف للياء، ومدرّب Flutter في DEPI.</p>
+      </article>
+      <article class="member reveal">
+        <div class="avatar">عش<img src="Ali%20El%20Sherif.jpeg" alt="علي الشريف" onerror="this.remove()"></div>
+        <h3>علي الشريف</h3>
+        <div class="role">IT Support Specialist</div>
+        <p>مسؤول الدعم الفني والتشغيل، وبيساعدك في أي مشكلة بعد التسليم.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ الأسئلة ============ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">أسئلة بتتسأل كتير</span>
+      <h2>عندك سؤال؟ غالباً إجابته هنا</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">هتاخدوا كام؟</button><div class="faq-a"><p>السعر بيتحدد حسب اللي محتاجه. بنسمعك الأول، وبعدها بنبعتلك عرض سعر واضح ومكتوب، وتقدر تبدأ بحاجة صغيرة زي موقع تعريفي وبعدين توسّع.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">هتخلصوا في قد إيه؟</button><div class="faq-a"><p>الموقع التعريفي غالباً من أسبوع لأسبوعين. الأنظمة والتطبيقات بتاخد وقت أكتر حسب حجمها، وبنحدد المدة معاك قبل ما نبدأ.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">أنا مش فاهم في التقنية خالص، هعرف أستخدمه؟</button><div class="faq-a"><p>أكيد. بنصمم الأنظمة بسيطة، ونشرحلك استخدامها بنفسنا، وبنفضل جنبك لحد ما تتعود.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">هتشتغلوا من غير ما أدفع قبل ما أشوف حاجة؟</button><div class="faq-a"><p>بنوريك نسخة تجريبية تشوف فيها شكل الفكرة الأول. لما توافق، بنتفق مكتوب على التفاصيل ونبدأ التنفيذ بعربون ودفعات على مراحل.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">لو حصلت مشكلة أو عايز تعديل بعد التسليم؟</button><div class="faq-a"><p>بنقدّم تعديلات مجانية في أول شهر، وبعدها دعم وصيانة باشتراك بسيط لو حبيت.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">بتشتغلوا مع ناس برا القاهرة؟</button><div class="faq-a"><p>أيوه، بنشتغل مع أي حد في مصر أونلاين: مكالمة أو واتساب، ونورّيك التقدم عن بعد.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ التواصل ============ -->
+<section class="contact" id="contact">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <h2>جاهز نظبّط شغلك؟ <em>كلمنا دلوقتي</em></h2>
+      <p class="sub">قولنا شغلك إيه وإيه اللي محتاجه، وهنرد عليك في أقرب وقت بفكرة وعرض واضح.</p>
+      <div class="contact-list">
+        <a href="https://wa.me/201090132799" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/></svg></span><span><small>واتساب</small><b>01090132799</b></span>
+        </a>
+        <a href="tel:+201090132799">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><span><small>اتصال</small><b>01090132799</b></span>
+        </a>
+        <a href="mailto:ahmedjaberahmed8@gmail.com">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span><small>إيميل</small><b>ahmedjaberahmed8@gmail.com</b></span>
+        </a>
+      </div>
+    </div>
+
+    <form class="form reveal" id="contactForm" novalidate>
+      <h3>ابعتلنا رسالة على واتساب</h3>
+      <div class="two">
+        <div class="field" id="f-name">
+          <label for="name">اسمك</label>
+          <input id="name" name="name" type="text" placeholder="مثال: محمد أحمد" autocomplete="name">
+          <span class="err">اكتب اسمك لو سمحت</span>
+        </div>
+        <div class="field">
+          <label for="biz">نوع شغلك</label>
+          <input id="biz" name="biz" type="text" placeholder="مثال: محل ملابس / صيدلية">
+        </div>
+      </div>
+      <div class="field">
+        <label for="service">محتاج إيه؟</label>
+        <select id="service" name="service">
+          <option>موقع تعريفي</option>
+          <option>نظام مخزون ومبيعات</option>
+          <option>تطبيق موبايل</option>
+          <option>متجر إلكتروني</option>
+          <option>نظام حجز ومواعيد</option>
+          <option>مش متأكد، عايز أستشير</option>
+        </select>
+      </div>
+      <div class="field" id="f-msg">
+        <label for="msg">احكيلنا باختصار</label>
+        <textarea id="msg" name="msg" placeholder="إيه المشكلة اللي عايز تحلها؟"></textarea>
+        <span class="err">اكتب كلمتين عن اللي محتاجه</span>
+      </div>
+      <button type="submit" class="btn btn-wa">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/><path class="h" d="M8.4 7.6c0 4 3.6 7.6 7.6 7.6l1.6-2-2.6-1.2-1 1.1c-1.3-.5-2.4-1.7-2.9-2.9l1.1-1L11 7.6z"/></svg>
+        ابعت على واتساب
+      </button>
+      <small class="hint">الزرار هيفتح واتساب بالرسالة جاهزة، وإنت بس تدوس إرسال.</small>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ الفوتر ============ -->
+<footer class="footer">
+  <div class="container row">
+    <div>© <span id="year">2026</span> Yalla Dev. كل الحقوق محفوظة.</div>
+    <nav class="links">
+      <a href="#services">خدماتنا</a>
+      <a href="#work">أعمالنا</a>
+      <a href="#team">الفريق</a>
+      <a href="#contact">تواصل معانا</a>
+      <!-- ضيفوا هنا روابط السوشيال ميديا (فيسبوك، لينكدإن، إنستجرام) لما تجهزوها -->
+    </nav>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/201090132799?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20Yalla%20Dev" target="_blank" rel="noopener" aria-label="كلمنا على واتساب">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/><path class="h" d="M8.4 7.6c0 4 3.6 7.6 7.6 7.6l1.6-2-2.6-1.2-1 1.1c-1.3-.5-2.4-1.7-2.9-2.9l1.1-1L11 7.6z"/></svg>
+</a>
+
+<!-- ============ نافذة تفاصيل المشروع ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="إغلاق">×</button>
+    <div class="modal-img" id="mImgWrap">
+      <img id="mImg" src="" alt="">
+      <div class="fallback" id="mFallback"></div>
+    </div>
+    <div class="modal-info">
+      <h3 id="mTitle"></h3>
+      <p id="mDesc"></p>
+      <div class="cols">
+        <div class="box"><b>المشكلة</b><span id="mProblem"></span></div>
+        <div class="box"><b>الحل</b><span id="mSolution"></span></div>
+      </div>
+      <div class="tags" id="mTags"></div>
+      <a class="btn btn-wa" id="mWa" href="#" target="_blank" rel="noopener">عايز نظام زي ده؟ كلمنا</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- إعدادات ---------- */
+  var WA_NUMBER = '201090132799';
+
+  /* ---------- بيانات المشاريع (عدّلوا النصوص والصور من هنا) ---------- */
+  var projects = [
+    {
+      cat:'systems', img:'1791976928032.jpg',
+      title:'نظام ERP للمخزون والمبيعات',
+      desc:'نظام متكامل بيدير المنتجات والمخازن والعملاء والموردين والفواتير والمشتريات، من الموبايل أو التابلت أو الويب.',
+      problem:'جرد بالدفتر وفواتير على ورق ومخزون مش متابَع.',
+      solution:'نظام بيحدّث المخزون تلقائي، ويطلّع فواتير PDF وتقارير، وبيدّي كل موظف الصلاحيات اللي تناسبه.',
+      tags:['Flutter','Supabase','PostgreSQL','BLoC/Cubit']
+    },
+    {
+      cat:'tech', img:'1791973892655.jpg',
+      title:'ClassTrack: حضور وغياب بالذكاء الاصطناعي',
+      desc:'نظام للجامعات بيسجّل الحضور بكود QR بيتغيّر كل 10 ثواني مع التحقق بالوجه، وبيتوقع الدرجات ويطلّع تحليلات.',
+      problem:'تسجيل الحضور بيتغشّ، والمتابعة بتتأخر لحد بعد الميدتيرم.',
+      solution:'حضور مؤمَّن بالـ QR والوجه، بيشتغل حتى من غير إنترنت، ولوحات متابعة للدكاترة والإدارة. اتجرّب مع طلبة حقيقيين في جامعة MTI.',
+      tags:['Flutter','YOLOv8','FaceNet','Supabase','Python']
+    },
+    {
+      cat:'shops', img:'1792670405775.jpg',
+      title:'متجر إلكتروني (تطبيق + API)',
+      desc:'تطبيق متجر كامل: تصفح منتجات وبحث وأقسام ومفضلة وسلة وطلب بالدفع عند الاستلام، وراه Laravel API آمن.',
+      problem:'محل عايز يبيع أونلاين من غير ما يتلخبط في المخزون والطلبات.',
+      solution:'طلبات بتتسجل وتخصم من المخزون تلقائي، وصلاحيات منفصلة للأدمن لإدارة المنتجات والأقسام.',
+      tags:['Flutter','Laravel 12','Sanctum','REST API']
+    },
+    {
+      cat:'shops', img:'1791973949957.jpg',
+      title:'تطبيق متجر بقالة بالعربي',
+      desc:'تطبيق تسوّق بواجهة عربي كاملة (RTL): أقسام وسلة وعناوين توصيل وخيارات دفع وحساب شخصي.',
+      problem:'الزبون عايز يطلب من البيت بسرعة وبشكل سهل بالعربي.',
+      solution:'تجربة شراء بسيطة من أول تصفح لحد تأكيد الطلب، بتصميم مناسب للمستخدم المصري.',
+      tags:['Flutter','Arabic RTL','Cart & Checkout']
+    },
+    {
+      cat:'shops', img:'1791976299411.jpg',
+      title:'لوحة تحكم للمتجر',
+      desc:'لوحة إدارة بتتحكم منها في المنتجات والأقسام والطلبات والعملاء والبانرات والتقارير، مع رسوم بيانية للمبيعات.',
+      problem:'صاحب المتجر مش شايف حالة الطلبات والمبيعات في مكان واحد.',
+      solution:'داشبورد بيوريك المبيعات وحالة الطلبات وأكتر المنتجات مبيعاً، وتعدّل المنتجات في ثواني.',
+      tags:['Flutter Web','Dashboard','Analytics']
+    },
+    {
+      cat:'booking', img:'1791973824313.jpg',
+      title:'نظام حجز فنادق (تطبيقين)',
+      desc:'تطبيق للعميل (بحث وحجز ودفع) وتطبيق للإدارة (فنادق وغرف وإتاحة وحجوزات)، بدفع إلكتروني.',
+      problem:'الحجز بالتليفون والرسايل بيضيّع حجوزات ومفيش متابعة للإتاحة.',
+      solution:'العميل يحجز ويدفع بنفسه، والإدارة تشوف الغرف والحجوزات من لوحة واحدة.',
+      tags:['Flutter','Supabase','PayPal','Clean Architecture']
+    },
+    {
+      cat:'booking', img:'1791976524622.jpg',
+      title:'نظام حجز مواعيد للعيادات',
+      desc:'العميل يختار الدكتور واليوم والميعاد ويأكد الحجز من الموبايل، والعيادة تدير الجداول والمواعيد.',
+      problem:'ازدحام التليفونات وتضارب المواعيد.',
+      solution:'مواعيد متاحة بتظهر لحظياً، وتأكيد حجز بضغطة، وإدارة للدكاترة والجداول.',
+      tags:['Flutter','Supabase','Cubit','Payments']
+    },
+    {
+      cat:'tech', img:'1791977084923%20(1).jpg',
+      title:'مكالمات صوت وفيديو لحظية',
+      desc:'تطبيق مكالمات واحد لواحد بجودة عالية، مع التحكم في الكاميرا والمايك، وإشارات اتصال لحظية.',
+      problem:'محتاج اتصال مباشر بين الناس جوه التطبيق من غير سيرفر معقد.',
+      solution:'اتصال مباشر (WebRTC) مع تبادل البيانات اللحظي عبر Supabase، وتجربة على أجهزة حقيقية.',
+      tags:['Flutter','WebRTC','Supabase Realtime']
+    }
+  ];
+
+  /* ---------- أدوات صغيرة ---------- */
+  function $(s, c){ return (c||document).querySelector(s); }
+  function $all(s, c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); }
+  function esc(str){
+    return String(str).replace(/[&<>"']/g, function(m){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+  function waLink(text){
+    return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
+  }
+
+  /* ---------- اللوجو: لو الصورة مش موجودة يظهر اسم نصي ---------- */
+  var brandImg = $('#brandImg');
+  brandImg.addEventListener('error', function(){ $('#brand').classList.add('noimg'); });
+  if(brandImg.complete && brandImg.naturalWidth === 0){ $('#brand').classList.add('noimg'); }
+
+  /* ---------- الهيدر والقائمة ---------- */
+  var header = $('#header'), menuBtn = $('#menuBtn'), navLinks = $('#navLinks');
+  function onScroll(){ header.classList.toggle('scrolled', window.scrollY > 10); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  menuBtn.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    menuBtn.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  $all('a', navLinks).forEach(function(a){
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open'); menuBtn.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
+    });
+  });
+
+  /* ---------- رسم كروت الأعمال ---------- */
+  var grid = $('#workGrid');
+  grid.innerHTML = projects.map(function(p, i){
+    return '<article class="project reveal" data-cat="'+p.cat+'" data-i="'+i+'" tabindex="0" role="button" aria-label="تفاصيل: '+esc(p.title)+'">'
+      + '<div class="shot">'
+      +   '<img src="'+p.img+'" alt="'+esc(p.title)+'" loading="lazy" onerror="this.parentElement.classList.add(\'noimg\');this.remove()">'
+      +   '<div class="fallback">'+esc(p.title)+'</div>'
+      +   '<span class="zoom">شوف التفاصيل</span>'
+      + '</div>'
+      + '<div class="project-body">'
+      +   '<h3>'+esc(p.title)+'</h3>'
+      +   '<p>'+esc(p.desc)+'</p>'
+      +   '<div class="tags">'+p.tags.slice(0,4).map(function(t){return '<span class="tag">'+esc(t)+'</span>';}).join('')+'</div>'
+      + '</div></article>';
+  }).join('');
+
+  /* ---------- فلتر الأعمال ---------- */
+  $all('.filter').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      $all('.filter').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      $all('.project', grid).forEach(function(card){
+        card.classList.toggle('hide', f !== 'all' && card.getAttribute('data-cat') !== f);
+      });
+    });
+  });
+
+  /* ---------- نافذة التفاصيل ---------- */
+  var modal = $('#modal'), lastFocus = null;
+  function openModal(i){
+    var p = projects[i]; lastFocus = document.activeElement;
+    var img = $('#mImg'), wrap = $('#mImgWrap');
+    wrap.classList.remove('noimg');
+    img.style.display = '';
+    img.onerror = function(){ wrap.classList.add('noimg'); img.style.display = 'none'; };
+    img.src = p.img; img.alt = p.title;
+    $('#mFallback').textContent = p.title;
+    $('#mTitle').textContent = p.title;
+    $('#mDesc').textContent = p.desc;
+    $('#mProblem').textContent = p.problem;
+    $('#mSolution').textContent = p.solution;
+    $('#mTags').innerHTML = p.tags.map(function(t){ return '<span class="tag">'+esc(t)+'</span>'; }).join('');
+    $('#mWa').href = waLink('السلام عليكم، شفت مشروع "' + p.title + '" في موقع Yalla Dev وعايز نظام شبهه لشغلي.');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    $('#modalClose').focus();
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    if(lastFocus && lastFocus.focus){ lastFocus.focus(); }
+  }
+  grid.addEventListener('click', function(e){
+    var c = e.target.closest('.project'); if(c){ openModal(+c.getAttribute('data-i')); }
+  });
+  grid.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){
+      var c = e.target.closest('.project');
+      if(c){ e.preventDefault(); openModal(+c.getAttribute('data-i')); }
+    }
+  });
+  $('#modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal){ closeModal(); } });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('open')){ closeModal(); } });
+
+  /* ---------- الأسئلة الشائعة ---------- */
+  $all('.faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      var item = q.parentElement, ans = $('.faq-a', item), open = item.classList.contains('open');
+      $all('.faq-item.open').forEach(function(o){
+        o.classList.remove('open'); $('.faq-a', o).style.maxHeight = null; $('.faq-q', o).setAttribute('aria-expanded','false');
+      });
+      if(!open){
+        item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; q.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+
+  /* ---------- فورم التواصل -> واتساب ---------- */
+  var form = $('#contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = $('#name').value.trim(), biz = $('#biz').value.trim(),
+        service = $('#service').value, msg = $('#msg').value.trim();
+    var okName = name.length >= 2, okMsg = msg.length >= 5;
+    $('#f-name').classList.toggle('invalid', !okName);
+    $('#f-msg').classList.toggle('invalid', !okMsg);
+    if(!okName || !okMsg){ return; }
+    var text = 'السلام عليكم، أنا ' + name
+      + (biz ? ' (شغلي: ' + biz + ')' : '')
+      + '\nمحتاج: ' + service
+      + '\n' + msg;
+    window.open(waLink(text), '_blank', 'noopener');
+  });
+  $all('#name,#msg').forEach(function(el){
+    el.addEventListener('input', function(){ el.closest('.field').classList.remove('invalid'); });
+  });
+
+  /* ---------- الظهور التدريجي + العدّاد ---------- */
+  function animateCount(el){
+    var target = +el.getAttribute('data-count'), n = 0, step = Math.max(1, Math.ceil(target/30));
+    var t = setInterval(function(){
+      n += step; if(n >= target){ n = target; clearInterval(t); }
+      el.textContent = n;
+    }, 40);
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.12});
+    $all('.reveal').forEach(function(el){ io.observe(el); });
+
+    var co = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ animateCount(en.target); co.unobserve(en.target); }
+      });
+    }, {threshold:.6});
+    $all('[data-count]').forEach(function(el){ co.observe(el); });
+  } else {
+    $all('.reveal').forEach(function(el){ el.classList.add('in'); });
+    $all('[data-count]').forEach(function(el){ el.textContent = el.getAttribute('data-count'); });
+  }
+
+  $('#year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
