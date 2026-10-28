@@ -293,7 +293,18 @@ section{padding:84px 0}
   transition:transform .25s, box-shadow .25s;
 }
 .member:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-.member.lead{box-shadow:var(--shadow)}
+.member.lead{
+  box-shadow:var(--shadow);grid-column:1/-1;order:-1;
+  display:flex;align-items:center;gap:36px;text-align:start;padding:34px 36px;
+}
+.member.lead .avatar{flex:none;margin:0}
+.member-info{flex:1;min-width:0}
+.tech-line{justify-content:flex-start;margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{
+  direction:ltr;background:rgba(10,61,145,.08);color:var(--navy);font-size:13.5px;font-weight:700;
+  padding:2px 14px;border-radius:999px;
+}
 .avatar{
   --av:clamp(150px,16vw,190px);
   position:relative;width:var(--av);height:var(--av);border-radius:50%;margin:0 auto 20px;overflow:hidden;
@@ -308,6 +319,7 @@ section{padding:84px 0}
 .member h3{font-size:clamp(20px,2.2vw,24px);color:var(--navy-dark)}
 .member .role{color:var(--orange-dark);font-weight:700;font-size:15px;margin-bottom:8px}
 .member p{color:var(--muted);font-size:15px}
+.member p + p{margin-top:10px}
 
 /* ============ الأسئلة ============ */
 .faq{background:#fff}
@@ -475,7 +487,9 @@ body{overflow-x:hidden}
 /* موبايل كبير: الفريق في عمود واحد وأحمد جابر الأول */
 @media (max-width:720px){
   .team-grid{grid-template-columns:1fr;max-width:440px;gap:22px}
-  .member.lead{order:-1}
+  .member.lead{flex-direction:column;text-align:center;gap:22px;padding:30px 20px}
+  .member.lead .avatar{margin:0 auto}
+  .tech-line{justify-content:center}
   .avatar{--av:180px}
   .modal{padding:12px}
   .modal-box{max-height:94vh}
@@ -737,9 +751,12 @@ body{overflow-x:hidden}
       </article>
       <article class="member lead reveal">
         <div class="avatar">أج<img src="Ahmed%20Jaber.png" alt="أحمد جابر" style="--zoom:1;--pos:50% 0%" onerror="this.remove()"></div>
-        <h3>أحمد جابر</h3>
-        <div class="role">Full-Stack Developer · Flutter & Laravel</div>
-        <p>بيبني التطبيقات والـ APIs والأنظمة من الألف للياء، ومدرّب Flutter في DEPI.</p>
+        <div class="member-info">
+          <h3>أحمد جابر أحمد</h3>
+          <div class="role">المؤسس والمدير التنفيذي لـ Yalla Dev</div>
+          <p>بيقود رؤية الفريق لتحويل الأفكار إلى حلول حقيقية، وأنجز أكتر من 10 مشاريع ويدرّب مطوري Flutter في DEPI. مبدأه: الرؤية وحدها لا تكفي، والقيمة الحقيقية في التنفيذ.</p>
+          <div class="chips tech-line"><span>Full-Stack Developer</span><span>Flutter</span><span>Laravel</span></div>
+        </div>
       </article>
       <article class="member reveal">
         <div class="avatar">عش<img src="Ali%20El%20Sherif.jpeg" alt="علي الشريف" onerror="this.remove()"></div>
