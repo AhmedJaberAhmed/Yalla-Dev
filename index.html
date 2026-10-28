@@ -293,13 +293,8 @@ section{padding:84px 0}
   transition:transform .25s, box-shadow .25s;
 }
 .member:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-.member.lead{
-  box-shadow:var(--shadow);grid-column:1/-1;order:-1;
-  display:flex;align-items:center;gap:36px;text-align:start;padding:34px 36px;
-}
-.member.lead .avatar{flex:none;margin:0}
-.member-info{flex:1;min-width:0}
-.tech-line{justify-content:flex-start;margin-top:14px}
+.member.lead{box-shadow:var(--shadow);order:-1}
+.tech-line{justify-content:center;margin-top:14px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{
   direction:ltr;background:rgba(10,61,145,.08);color:var(--navy);font-size:13.5px;font-weight:700;
@@ -487,9 +482,6 @@ body{overflow-x:hidden}
 /* موبايل كبير: الفريق في عمود واحد وأحمد جابر الأول */
 @media (max-width:720px){
   .team-grid{grid-template-columns:1fr;max-width:440px;gap:22px}
-  .member.lead{flex-direction:column;text-align:center;gap:22px;padding:30px 20px}
-  .member.lead .avatar{margin:0 auto}
-  .tech-line{justify-content:center}
   .avatar{--av:180px}
   .modal{padding:12px}
   .modal-box{max-height:94vh}
