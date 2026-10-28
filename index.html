@@ -287,7 +287,7 @@ section{padding:84px 0}
 }
 
 /* ============ الفريق ============ */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1080px;margin-inline:auto;align-items:stretch}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:1160px;margin-inline:auto;align-items:stretch}
 .member{
   background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px 22px;text-align:center;
   transition:transform .25s, box-shadow .25s;
@@ -295,7 +295,7 @@ section{padding:84px 0}
 .member:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
 .member.lead{box-shadow:var(--shadow)}
 .avatar{
-  --av:clamp(160px,18vw,210px);
+  --av:clamp(150px,16vw,190px);
   position:relative;width:var(--av);height:var(--av);border-radius:50%;margin:0 auto 20px;overflow:hidden;
   background:linear-gradient(135deg,var(--navy),var(--orange));display:grid;place-items:center;
   color:#fff;font-weight:800;font-size:calc(var(--av) * .3);border:5px solid #fff;box-shadow:var(--shadow-lg);
@@ -449,6 +449,7 @@ body{overflow-x:hidden}
   .nav-links{gap:18px}
   .hero-grid{gap:32px}
   .contact-grid{gap:30px}
+  .team-grid{grid-template-columns:repeat(2,1fr);max-width:760px}
 }
 
 /* تابلت: القائمة بتتحول لزرار */
@@ -570,7 +571,7 @@ body{overflow-x:hidden}
       </div>
       <div class="hero-stats">
         <div><strong><span data-count="10">0</span><small>+</small></strong><span>مشروع من تنفيذنا</span></div>
-        <div><strong><span data-count="3">0</span></strong><span>مبرمجين في الفريق</span></div>
+        <div><strong><span data-count="4">0</span></strong><span>أعضاء في الفريق</span></div>
         <div><strong>Flutter</strong><span>للموبايل والويب</span></div>
       </div>
     </div>
@@ -745,6 +746,12 @@ body{overflow-x:hidden}
         <h3>علي الشريف</h3>
         <div class="role">IT Support Specialist</div>
         <p>مسؤول الدعم الفني والتشغيل، وبيساعدك في أي مشكلة بعد التسليم.</p>
+      </article>
+      <article class="member reveal">
+        <div class="avatar">أع<img src="Ahmed%20Awad.jpg" alt="أحمد عوض" onerror="this.remove()"></div>
+        <h3>أحمد عوض</h3>
+        <div class="role">Database engineering and social media manager</div>
+        <p>بيصمم ويدير قواعد البيانات، وبيتولى صفحاتنا على السوشيال ميديا.</p>
       </article>
     </div>
   </div>
